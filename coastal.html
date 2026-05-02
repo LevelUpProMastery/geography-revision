@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GCSE Geography | Coastal Landscapes</title>
+  <style>
+    :root {
+      --green-dark: #0B2E1F;
+      --green: #0F3D2E;
+      --gold: #C89B2A;
+      --gold-dark: #A67C1F;
+      --light: #F5F7FA;
+      --white: #FFFFFF;
+      --text: #1F2937;
+      --muted: #6B7280;
+      --success-bg: #D1FAE5;
+      --ebi-bg: #FFEDD5;
+      --border: #E5E7EB;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--light);
+      color: var(--text);
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--green-dark), var(--green));
+      color: var(--white);
+      padding: 32px 20px;
+      text-align: center;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .logo {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      background: var(--gold);
+      color: var(--white);
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(32px, 6vw, 56px);
+      letter-spacing: 1px;
+    }
+
+    header p {
+      font-size: 18px;
+      max-width: 760px;
+      margin: 12px auto 0;
+      line-height: 1.5;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .screen { display: none; }
+    .screen.active { display: block; }
+
+    .topic-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .topic-card,
+    .panel {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 22px;
+      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
+    }
+
+    .topic-card {
+      cursor: pointer;
+      text-align: left;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .topic-card:hover,
+    .topic-card:focus {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(200, 155, 42, 0.25);
+      outline: 3px solid rgba(200, 155, 42, 0.4);
+    }
+
+    .badge {
+      display: inline-block;
+      background: #FFF8E1;
+      color: var(--green-dark);
+      border: 1px solid rgba(200, 155, 42, 0.45);
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .back-button,
+    .primary-button,
+    .secondary-button,
+    .tab-button {
+      border: none;
+      border-radius: 12px;
+      padding: 12px 16px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .primary-button {
+      background: var(--gold);
+      color: var(--white);
+    }
+
+    .primary-button:hover { background: var(--gold-dark); }
+
+    .secondary-button,
+    .back-button {
+      background: #E5E7EB;
+      color: var(--text);
+    }
+
+    .tab-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 20px 0;
+    }
+
+    .tab-button {
+      background: var(--white);
+      color: var(--green-dark);
+      border: 2px solid var(--gold);
+    }
+
+    .tab-button.active {
+      background: var(--gold);
+      color: var(--white);
+    }
+
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    .notes {
+      line-height: 1.7;
+      font-size: 17px;
+    }
+
+    .notes h3 {
+      margin-top: 28px;
+      color: var(--green-dark);
+    }
+
+    .key-term {
+      background: #FFF8E1;
+      border-left: 5px solid var(--gold);
+      padding: 14px;
+      border-radius: 12px;
+      margin: 14px 0;
+    }
+
+    .flashcard {
+      min-height: 180px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      border: 3px dashed var(--gold);
+      border-radius: 20px;
+      padding: 24px;
+      cursor: pointer;
+      background: #FFFBEB;
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    textarea {
+      width: 100%;
+      padding: 14px;
+      border-radius: 14px;
+      border: 1px solid #D1D5DB;
+      font-family: inherit;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+
+    .feedback {
+      margin-top: 14px;
+      padding: 14px;
+      border-radius: 12px;
+      line-height: 1.5;
+    }
+
+    .exam-card {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px;
+      margin-bottom: 18px;
+      background: #FFFFFF;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+    }
+
+    .question-box,
+    .process-box,
+    .model-box,
+    .practice-box {
+      border-radius: 14px;
+      padding: 14px;
+      margin-top: 12px;
+      line-height: 1.6;
+    }
+
+    .question-box {
+      background: #EFF6FF;
+      border-left: 5px solid #2563EB;
+    }
+
+    .process-box {
+      background: #F0FDF4;
+      border-left: 5px solid #16A34A;
+    }
+
+    .model-box {
+      background: #FFF8E1;
+      border-left: 5px solid var(--gold);
+    }
+
+    .practice-box {
+      background: #F9FAFB;
+      border-left: 5px solid var(--green);
+    }
+
+    .www { background: var(--success-bg); }
+    .ebi { background: var(--ebi-bg); }
+    .score { background: #DBEAFE; }
+
+    .muted {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .two-column {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+
+    @media (min-width: 900px) {
+      .two-column { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <img src="logo.png" alt="Level Up Logo" style="height:60px; border-radius:8px; background:black; padding:4px;">
+      <div>
+        <strong>Level Up Pro Mastery</strong><br />
+        <span>GCSE Geography Revision</span>
+      </div>
+    </div>
+    <h1>Coastal Landscapes</h1>
+    <p>Choose a coastal topic, revise the notes, test yourself with flashcards, study model answers and practise exam questions with WWW and EBI feedback.</p>
+  </header>
+
+  <main>
+    <section id="menuScreen" class="screen active">
+      <div class="panel">
+        <span class="badge">GCSE Geography</span>
+        <h2>Choose a Coastal Landscapes topic</h2>
+        <p>Click a topic below. Each one opens a full revision page with notes, flashcards, exam examples and practice questions.</p>
+      </div>
+      <div id="topicGrid" class="topic-grid"></div>
+    </section>
+
+    <section id="topicScreen" class="screen">
+      <button class="back-button" onclick="goBackToMenu()">← Back to Coastal Landscape Topics</button>
+      <div class="panel" style="margin-top: 18px;">
+        <span class="badge" id="topicBadge">Coastal Landscapes</span>
+        <h2 id="topicTitle"></h2>
+        <p id="topicIntro"></p>
+
+        <div class="tab-buttons">
+          <button class="tab-button active" onclick="showTab('notesTab', this)">Notes</button>
+          <button class="tab-button" onclick="showTab('flashcardsTab', this)">Flashcards</button>
+          <button class="tab-button" onclick="showTab('examplesTab', this)">Example Answers</button>
+          <button class="tab-button" onclick="showTab('practiceTab', this)">Exam Practice</button>
+        </div>
+
+        <div id="notesTab" class="tab-panel active">
+          <div id="notesContent" class="notes"></div>
+        </div>
+
+        <div id="flashcardsTab" class="tab-panel">
+          <div class="flashcard" onclick="flipCard()">
+            <span id="cardText"></span>
+          </div>
+          <p class="muted">Click the flashcard to reveal the answer.</p>
+          <button class="secondary-button" onclick="previousCard()">Previous</button>
+          <button class="primary-button" onclick="nextCard()">Next</button>
+        </div>
+
+        <div id="examplesTab" class="tab-panel">
+          <div class="two-column">
+            <div>
+              <h3>How to answer</h3>
+              <div id="howToAnswer"></div>
+            </div>
+            <div class="key-term">
+              <h3>Model answer</h3>
+              <p id="modelAnswer"></p>
+            </div>
+          </div>
+        </div>
+
+        <div id="practiceTab" class="tab-panel">
+          <div id="examContent"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const topics = [
+      {
+        id: "management",
+        title: "Coastal Management",
+        intro: "Hard engineering, soft engineering and the Holderness Coast case study.",
+        notes: `
+          <h3>Overview</h3>
+          <p>Managing coastlines is difficult because different places have different needs. Some areas need strong protection because homes, roads, businesses or important infrastructure are at risk. Other areas may be left to natural processes.</p>
+          <div class="key-term"><strong>Coastal management:</strong> The methods used to protect the coast from erosion and flooding.</div>
+          <p>Coastal management techniques can be divided into two main types: <strong>hard engineering</strong> and <strong>soft engineering</strong>.</p>
+
+          <h3>Hard Engineering</h3>
+          <p>Hard engineering uses man-made structures to control the sea and protect the coastline.</p>
+          <ul>
+            <li><strong>Sea wall:</strong> Built at the base of a cliff to reflect wave energy. It is very effective at reducing flooding and erosion, but it is expensive and can look unattractive.</li>
+            <li><strong>Gabions:</strong> Wire cages filled with rocks. They absorb wave energy and are cheaper than sea walls, but they can look unattractive and may break over time.</li>
+            <li><strong>Groynes:</strong> Wooden or rock barriers built at right angles to the beach. They trap sediment moved by longshore drift, building up the beach and reducing erosion. However, they can starve beaches further down the coast of sediment.</li>
+            <li><strong>Rock armour / rip rap:</strong> Large rocks placed at the base of cliffs to absorb wave energy. They are effective and cheaper than sea walls, but can look unnatural and may put off tourists.</li>
+          </ul>
+
+          <h3>Soft Engineering</h3>
+          <p>Soft engineering works with natural processes and is usually more environmentally friendly.</p>
+          <ul>
+            <li><strong>Beach nourishment:</strong> Sand is added to beaches to build them up. This helps absorb wave energy and supports tourism, but it needs repeating because sediment is moved by longshore drift.</li>
+            <li><strong>Managed retreat:</strong> Low-value land is allowed to flood or erode naturally. This can protect more valuable areas but means some land is lost.</li>
+            <li><strong>Cliff stabilisation:</strong> Cliffs are covered with matting and vegetation is planted to make them more stable and reduce erosion.</li>
+            <li><strong>Do nothing:</strong> No action is taken. This is the cheapest option and allows natural processes to continue, but homes, businesses, farmland and tourist facilities may be lost.</li>
+          </ul>
+
+          <h3>Case Study: Holderness Coast</h3>
+          <p>The Holderness Coast is in East Yorkshire and is one of the fastest eroding coastlines in the world. In some places, erosion can reach around <strong>5 metres per year</strong>.</p>
+          <div class="key-term"><strong>Why does it erode quickly?</strong> The cliffs are made of soft boulder clay, which is easily eroded by waves and weathering.</div>
+          <h3>Problems at Holderness</h3>
+          <ul>
+            <li>29 villages have been lost to the sea in the last 1000 years.</li>
+            <li>Farmers are losing valuable farmland.</li>
+            <li>Holiday caravans and buildings have collapsed into the sea.</li>
+            <li>Holbeck Hall Hotel collapsed into the sea in 1993.</li>
+            <li>Defences at Mappleton reduce sediment moving further down the coast, increasing erosion elsewhere.</li>
+          </ul>
+          <h3>Solutions at Holderness</h3>
+          <ul>
+            <li>£2 million was spent on rock armour at Mappleton.</li>
+            <li>Two rock groynes were built to trap sediment and build up the beach.</li>
+            <li>A sea wall was built at Easington to protect the gas terminal.</li>
+            <li>Offshore barriers have also been used along parts of the coastline.</li>
+          </ul>
+        `,
+        flashcards: [
+          ["What is hard engineering?", "Man-made structures used to control the sea."],
+          ["Give one example of hard engineering.", "Sea wall, groynes, gabions or rock armour."],
+          ["What does a sea wall do?", "It reflects wave energy to reduce erosion and flooding."],
+          ["What is one disadvantage of sea walls?", "They are expensive and can look unattractive."],
+          ["What are groynes used for?", "They trap sediment and build up beaches."],
+          ["What problem can groynes cause?", "They can starve beaches further down the coast of sediment."],
+          ["What is rock armour?", "Large rocks placed at the base of cliffs to absorb wave energy."],
+          ["What is soft engineering?", "Managing the coast by working with natural processes."],
+          ["What is beach nourishment?", "Adding sand to beaches to build them up and absorb wave energy."],
+          ["Why does beach nourishment need repeating?", "Because sediment is moved by longshore drift."],
+          ["What is managed retreat?", "Allowing low-value land to flood or erode naturally."],
+          ["Where is the Holderness Coast?", "East Yorkshire."],
+          ["Why does Holderness erode quickly?", "The cliffs are made of soft boulder clay."],
+          ["How fast can Holderness erode?", "Around 5 metres per year in some areas."],
+          ["Give one impact of erosion at Holderness.", "Loss of villages, farmland, buildings or tourist facilities."]
+        ],
+        howTo: `
+          <ol>
+            <li>Start by naming the management technique.</li>
+            <li>Explain how it works using key terms such as wave energy, sediment, longshore drift or erosion.</li>
+            <li>Give an advantage and a disadvantage.</li>
+            <li>For longer answers, use Holderness or Mappleton as evidence.</li>
+            <li>Finish with a judgement if the question asks you to evaluate.</li>
+          </ol>
+        `,
+        modelAnswer: "Groynes are wooden or rock structures built at right angles to the coast. They trap sediment moved by longshore drift, which builds up the beach. A wider beach absorbs more wave energy, so cliffs are protected from erosion. However, groynes can cause problems further down the coast because less sediment reaches those areas, which can increase erosion.",
+        examQuestions: [
+          {
+            marks: 2,
+            question: "Give two examples of hard engineering used to manage the coast. [2 marks]",
+            process: "For a 2-mark question, give two clear examples. You do not need to explain them unless the question says explain.",
+            model: "Two examples of hard engineering are sea walls and groynes.",
+            practice: "Give two examples of soft engineering used to manage the coast. [2 marks]",
+            markPoints: ["beach nourishment", "managed retreat", "cliff stabilisation", "do nothing"]
+          },
+          {
+            marks: 4,
+            question: "Explain one advantage and one disadvantage of using rock armour to protect the coast. [4 marks]",
+            process: "For a 4-mark explain question, make one clear point about the advantage and develop it. Then make one clear point about the disadvantage and develop it.",
+            model: "One advantage of rock armour is that the large rocks absorb wave energy, which reduces erosion at the base of the cliff. One disadvantage is that rock armour can look unnatural and unattractive, which may reduce the appeal of the area for tourists.",
+            practice: "Explain one advantage and one disadvantage of using a sea wall to protect the coast. [4 marks]",
+            markPoints: ["reflect", "wave energy", "flooding", "erosion", "expensive", "unattractive"]
+          },
+          {
+            marks: 6,
+            question: "Explain how groynes affect coastal processes. [6 marks]",
+            process: "For a 6-mark question, explain the process in a clear chain. Use key terms, then explain both the positive effect and the possible negative effect further down the coast.",
+            model: "Groynes are wooden or rock structures built at right angles to the coast. They trap sediment moved by longshore drift, which builds up the beach. A wider beach absorbs more wave energy, so cliffs are protected from erosion. However, groynes can cause problems further down the coast because less sediment reaches those areas, which can increase erosion.",
+            practice: "Explain how beach nourishment helps to manage coastal erosion. [6 marks]",
+            markPoints: ["beach nourishment", "sand", "beach", "wave energy", "erosion", "longshore drift", "repeat"]
+          },
+          {
+            marks: 9,
+            question: "‘Hard engineering is the best way to manage coastal erosion.’ To what extent do you agree? [9 marks]",
+            process: "For a 9-mark question, write a balanced answer. Explain why hard engineering can be useful, explain why soft engineering may also be useful, include a case study example, and finish with a clear judgement.",
+            model: "Hard engineering can be very effective because structures such as sea walls and rock armour provide strong protection from wave energy. For example, at Mappleton on the Holderness Coast, rock armour and groynes were used to protect the village from rapid erosion. However, hard engineering is often expensive and can create problems further down the coast by interrupting sediment movement. Soft engineering, such as beach nourishment or managed retreat, can be more natural and sustainable, although it may not provide enough protection for high-value areas. Overall, I partly agree because hard engineering is useful where people and infrastructure are at risk, but soft engineering may be better in lower-value areas.",
+            practice: "‘Soft engineering is better than hard engineering for managing the coast.’ To what extent do you agree? [9 marks]",
+            markPoints: ["hard engineering", "soft engineering", "sea wall", "rock armour", "groynes", "beach nourishment", "managed retreat", "holderness", "mappleton", "judgement"]
+          }
+        ]
+      },
+      {
+        id: "erosion",
+        title: "Processes of Erosion",
+        intro: "Hydraulic action, abrasion, attrition and solution.",
+        notes: placeholderNotes("Processes of Erosion"),
+        flashcards: placeholderCards("erosion"),
+        howTo: placeholderHowTo(),
+        modelAnswer: "Add your model answer here once you upload your notes.",
+        examQuestions: placeholderExamQuestions("coastal erosion", ["hydraulic action", "abrasion", "attrition", "solution", "erosion"]) 
+      },
+      {
+        id: "transportation",
+        title: "Processes of Transportation",
+        intro: "Traction, saltation, suspension and solution along the coast.",
+        notes: placeholderNotes("Processes of Transportation"),
+        flashcards: placeholderCards("transportation"),
+        howTo: placeholderHowTo(),
+        modelAnswer: "Add your model answer here once you upload your notes.",
+        examQuestions: placeholderExamQuestions("coastal transportation", ["traction", "saltation", "suspension", "solution", "longshore drift"]) 
+      },
+      {
+        id: "waves",
+        title: "Waves",
+        intro: "Constructive waves, destructive waves, swash and backwash.",
+        notes: placeholderNotes("Waves"),
+        flashcards: placeholderCards("waves"),
+        howTo: placeholderHowTo(),
+        modelAnswer: "Add your model answer here once you upload your notes.",
+        examQuestions: placeholderExamQuestions("waves", ["constructive", "destructive", "swash", "backwash", "deposition", "erosion"]) 
+      },
+      {
+        id: "erosionalLandforms",
+        title: "Erosional Landforms",
+        intro: "Headlands, bays, caves, arches, stacks and stumps.",
+        notes: placeholderNotes("Erosional Landforms"),
+        flashcards: placeholderCards("erosional landforms"),
+        howTo: placeholderHowTo(),
+        modelAnswer: "Add your model answer here once you upload your notes.",
+        examQuestions: placeholderExamQuestions("erosional landforms", ["crack", "cave", "arch", "collapse", "stack", "hydraulic action", "abrasion"]) 
+      },
+      {
+        id: "depositionalLandforms",
+        title: "Depositional Landforms",
+        intro: "Beaches, spits and bars formed by deposition.",
+        notes: placeholderNotes("Depositional Landforms"),
+        flashcards: placeholderCards("depositional landforms"),
+        howTo: placeholderHowTo(),
+        modelAnswer: "Add your model answer here once you upload your notes.",
+        examQuestions: placeholderExamQuestions("depositional landforms", ["longshore drift", "deposition", "sediment", "change in direction", "spit"]) 
+      },
+      {
+        id: "longshoreDrift",
+        title: "Longshore Drift",
+        intro: "The movement of sediment along the coastline.",
+        notes: placeholderNotes("Longshore Drift"),
+        flashcards: placeholderCards("longshore drift"),
+        howTo: placeholderHowTo(),
+        modelAnswer: "Add your model answer here once you upload your notes.",
+        examQuestions: placeholderExamQuestions("longshore drift", ["swash", "backwash", "prevailing wind", "angle", "sediment"]) 
+      }
+    ];
+
+    let currentTopic = topics[0];
+    let cardIndex = 0;
+    let cardFlipped = false;
+
+    function placeholderNotes(topicName) {
+      return `
+        <h3>${topicName}</h3>
+        <div class="key-term"><strong>Notes coming soon:</strong> Paste your notes for ${topicName} here.</div>
+        <p>This section is ready to be replaced with your full GCSE Geography notes.</p>
+      `;
+    }
+
+    function placeholderCards(topicName) {
+      return [
+        [`What is ${topicName}?`, "Add the answer from your notes here."],
+        ["Name one key term for this topic.", "Add a key term here."],
+        ["Give one exam tip for this topic.", "Use key vocabulary and explain each stage clearly."]
+      ];
+    }
+
+    function placeholderHowTo() {
+      return `
+        <ol>
+          <li>Read the command word carefully.</li>
+          <li>Use key geographical vocabulary.</li>
+          <li>Explain the process step by step.</li>
+          <li>Use an example where possible.</li>
+          <li>Link back to the question.</li>
+        </ol>
+      `;
+    }
+
+    function placeholderExamQuestions(topicName, markPoints) {
+      return [
+        {
+          marks: 2,
+          question: `Give two key terms linked to ${topicName}. [2 marks]`,
+          process: "For a 2-mark question, give two accurate points. Keep your answer short and precise.",
+          model: `Two key terms linked to ${topicName} are ${markPoints[0]} and ${markPoints[1] || markPoints[0]}.`,
+          practice: `Give two facts about ${topicName}. [2 marks]`,
+          markPoints: markPoints
+        },
+        {
+          marks: 4,
+          question: `Explain one important feature of ${topicName}. [4 marks]`,
+          process: "For a 4-mark explain question, make a point, develop it, use a key term, and link back to the question.",
+          model: "Use your notes to add a model answer for this question.",
+          practice: `Explain one process linked to ${topicName}. [4 marks]`,
+          markPoints: markPoints
+        },
+        {
+          marks: 6,
+          question: `Explain how ${topicName} affects the coastline. [6 marks]`,
+          process: "For a 6-mark question, build a clear chain of explanation using key terms in the correct order.",
+          model: "Use your notes to add a developed model answer for this question.",
+          practice: `Explain the importance of ${topicName} in shaping the coast. [6 marks]`,
+          markPoints: markPoints
+        }
+      ];
+    }
+
+    function renderMenu() {
+      const grid = document.getElementById("topicGrid");
+      grid.innerHTML = topics.map(topic => `
+        <article class="topic-card" tabindex="0" onclick="openTopic('${topic.id}')" onkeydown="if(event.key==='Enter') openTopic('${topic.id}')">
+          <span class="badge">Coastal Landscapes</span>
+          <h3>${topic.title}</h3>
+          <p>${topic.intro}</p>
+          <strong>Open topic →</strong>
+        </article>
+      `).join("");
+    }
+
+    function openTopic(id) {
+      currentTopic = topics.find(topic => topic.id === id);
+      cardIndex = 0;
+      cardFlipped = false;
+
+      document.getElementById("topicTitle").textContent = currentTopic.title;
+      document.getElementById("topicIntro").textContent = currentTopic.intro;
+      document.getElementById("notesContent").innerHTML = currentTopic.notes;
+      document.getElementById("howToAnswer").innerHTML = currentTopic.howTo;
+      document.getElementById("modelAnswer").textContent = currentTopic.modelAnswer;
+      renderExamQuestions();
+      updateCard();
+
+      document.getElementById("menuScreen").classList.remove("active");
+      document.getElementById("topicScreen").classList.add("active");
+      resetTabs();
+      window.scrollTo(0, 0);
+    }
+
+    function goBackToMenu() {
+      document.getElementById("topicScreen").classList.remove("active");
+      document.getElementById("menuScreen").classList.add("active");
+      window.scrollTo(0, 0);
+    }
+
+    function resetTabs() {
+      document.querySelectorAll(".tab-panel").forEach(panel => panel.classList.remove("active"));
+      document.querySelectorAll(".tab-button").forEach(button => button.classList.remove("active"));
+      document.getElementById("notesTab").classList.add("active");
+      document.querySelector(".tab-button").classList.add("active");
+    }
+
+    function showTab(tabId, button) {
+      document.querySelectorAll(".tab-panel").forEach(panel => panel.classList.remove("active"));
+      document.querySelectorAll(".tab-button").forEach(btn => btn.classList.remove("active"));
+      document.getElementById(tabId).classList.add("active");
+      button.classList.add("active");
+    }
+
+    function updateCard() {
+      const card = currentTopic.flashcards[cardIndex];
+      document.getElementById("cardText").textContent = cardFlipped ? card[1] : card[0];
+    }
+
+    function flipCard() {
+      cardFlipped = !cardFlipped;
+      updateCard();
+    }
+
+    function nextCard() {
+      cardIndex = (cardIndex + 1) % currentTopic.flashcards.length;
+      cardFlipped = false;
+      updateCard();
+    }
+
+    function previousCard() {
+      cardIndex = (cardIndex - 1 + currentTopic.flashcards.length) % currentTopic.flashcards.length;
+      cardFlipped = false;
+      updateCard();
+    }
+
+    function renderExamQuestions() {
+      const container = document.getElementById("examContent");
+      container.innerHTML = currentTopic.examQuestions.map((exam, index) => `
+        <div class="exam-card">
+          <span class="badge">${exam.marks} marks</span>
+          <div class="question-box">
+            <strong>Exam-style question</strong>
+            <p>${exam.question}</p>
+          </div>
+          <div class="process-box">
+            <strong>How to answer it</strong>
+            <p>${exam.process}</p>
+          </div>
+          <div class="model-box">
+            <strong>Model answer</strong>
+            <p>${exam.model}</p>
+          </div>
+          <div class="practice-box">
+            <strong>Now practise a similar question</strong>
+            <p>${exam.practice}</p>
+            <textarea id="practiceAnswer${index}" rows="6" placeholder="Write your answer here..."></textarea>
+            <br /><br />
+            <button class="primary-button" onclick="markPracticeAnswer(${index})">Mark my answer</button>
+            <div id="practiceFeedback${index}"></div>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function markPracticeAnswer(index) {
+      const exam = currentTopic.examQuestions[index];
+      const answer = document.getElementById(`practiceAnswer${index}`).value.toLowerCase();
+      const points = exam.markPoints;
+      const found = points.filter(point => answer.includes(point.toLowerCase()));
+      const missing = points.filter(point => !answer.includes(point.toLowerCase()));
+      const score = Math.min(found.length, points.length);
+
+      let www = "You have attempted the question and started to build an answer.";
+      if (found.length > 0) {
+        www = `You used relevant geography terms such as: ${found.join(", ")}.`;
+      }
+
+      let ebi = "Add more specific geographical vocabulary and explain your points step by step.";
+      if (missing.length > 0) {
+        ebi = `To improve, try to include: ${missing.slice(0, 4).join(", ")}.`;
+      }
+
+      document.getElementById(`practiceFeedback${index}`).innerHTML = `
+        <div class="feedback score"><strong>Estimated keyword score:</strong> ${score}/${points.length}</div>
+        <div class="feedback www"><strong>WWW:</strong> ${www}</div>
+        <div class="feedback ebi"><strong>EBI:</strong> ${ebi}</div>
+      `;
+    }
+
+    renderMenu();
+  </script>
+</body>
+</html>
