@@ -280,27 +280,30 @@
     }
 
     .question-box {
-      background: #C89B2A;
-      color: #061a12;
-      border-left: 5px solid #061a12;
-      background: #EFF6FF;
-      border-left: 5px solid #2563EB;
+      background: #0F3D2E;
+      color: #FFFFFF;
+      border-left: 5px solid #C89B2A;
+      border-radius: 14px;
+      padding: 14px;
+      margin-top: 12px;
     }
 
     .process-box {
       background: #0F3D2E;
-      color: white;
+      color: #FFFFFF;
       border-left: 5px solid #C89B2A;
-      background: #F0FDF4;
-      border-left: 5px solid #16A34A;
+      border-radius: 14px;
+      padding: 14px;
+      margin-top: 12px;
     }
 
     .model-box {
-      background: #C89B2A;
-      color: #061a12;
-      border-left: 5px solid #061a12;
-      background: #FFF8E1;
-      border-left: 5px solid var(--gold);
+      background: #0F3D2E;
+      color: #FFFFFF;
+      border-left: 5px solid #C89B2A;
+      border-radius: 14px;
+      padding: 14px;
+      margin-top: 12px;
     }
 
     .practice-box {
@@ -378,19 +381,14 @@
         </div>
 
         <div id="examplesTab" class="tab-panel">
-          <div class="two-column">
-            <div>
-              <h3>How to answer</h3>
-              <div id="howToAnswer"></div>
-            </div>
-            <div class="key-term">
-              <h3>Model answer</h3>
-              <p id="modelAnswer"></p>
-            </div>
-          </div>
+          <p class="muted">Exam-style questions with guidance and model answers.</p>
+          <div id="examContent"></div>
+        </div>
         </div>
 
         <div id="practiceTab" class="tab-panel">
+          <p class="muted">(Optional) Add extra practice here later.</p>
+        </div>
           <p class="muted">Use these exam-style questions to learn how to structure answers of different mark lengths.</p>
           <div id="examContent"></div>
         </div>
@@ -655,7 +653,6 @@
       document.getElementById("howToAnswer").innerHTML = currentTopic.howTo;
       document.getElementById("modelAnswer").textContent = currentTopic.modelAnswer;
       renderExamQuestions();
-      updateCard();
 
       document.getElementById("menuScreen").classList.remove("active");
       document.getElementById("topicScreen").classList.add("active");
