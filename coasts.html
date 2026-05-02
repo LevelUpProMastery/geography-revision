@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GCSE Geography - Coasts</title>
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #F5F7FA;
+  }
+
+  header {
+    background: linear-gradient(135deg, #0B2E1F, #0F3D2E);
+    color: white;
+    padding: 30px;
+    text-align: center;
+  }
+
+  h1 { margin: 0; }
+
+  .container {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+  }
+
+  .tabs button {
+    padding: 10px 15px;
+    margin: 5px;
+    border: none;
+    background: #C89B2A;
+    color: white;
+    cursor: pointer;
+    border-radius: 8px;
+  }
+
+  .tab {
+    display: none;
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    margin-top: 10px;
+  }
+
+  .tab.active {
+    display: block;
+  }
+
+  .flashcard {
+    border: 2px dashed #0F3D2E;
+    padding: 30px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 20px;
+    border-radius: 12px;
+  }
+
+  textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+  }
+
+  button.mark {
+    margin-top: 10px;
+    padding: 10px;
+    background: #C89B2A;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  .feedback {
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 8px;
+  }
+
+  .www { background: #d1fae5; }
+  .ebi { background: #ffedd5; }
+
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Coasts Revision</h1>
+  <p>Notes • Flashcards • Exam Practice • AI Feedback</p>
+</header>
+
+<div class="container">
+
+  <div class="tabs">
+    <button onclick="showTab('notes')">Notes</button>
+    <button onclick="showTab('flashcards')">Flashcards</button>
+    <button onclick="showTab('examples')">Example Answer</button>
+    <button onclick="showTab('exam')">Practice Question</button>
+  </div>
+
+  <!-- NOTES -->
+  <div id="notes" class="tab active">
+    <h2>Notes</h2>
+    <p>Coasts are shaped by erosion, transportation and deposition.</p>
+
+    <h3>Erosion types:</h3>
+    <ul>
+      <li>Hydraulic action</li>
+      <li>Abrasion</li>
+      <li>Attrition</li>
+      <li>Solution</li>
+    </ul>
+
+    <p>Landforms include caves, arches, stacks and stumps.</p>
+  </div>
+
+  <!-- FLASHCARDS -->
+  <div id="flashcards" class="tab">
+    <div class="flashcard" onclick="flipCard()">
+      <span id="cardText">What is erosion?</span>
+    </div>
+  </div>
+
+  <!-- EXAMPLE -->
+  <div id="examples" class="tab">
+    <h2>How to Answer</h2>
+    <ol>
+      <li>Use key terms</li>
+      <li>Explain each stage clearly</li>
+      <li>Link back to the question</li>
+    </ol>
+
+    <h3>Model Answer</h3>
+    <p>
+      Waves erode cracks in a headland through hydraulic action and abrasion.
+      The crack becomes a cave, then an arch. The arch collapses leaving a stack.
+    </p>
+  </div>
+
+  <!-- EXAM -->
+  <div id="exam" class="tab">
+    <h2>Explain how a stack is formed [6 marks]</h2>
+
+    <textarea id="answer" rows="6" placeholder="Write your answer here..."></textarea>
+    <button class="mark" onclick="markAnswer()">Mark my answer</button>
+
+    <div id="feedback"></div>
+  </div>
+
+</div>
+
+<script>
+  function showTab(id) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+  }
+
+  // Flashcards
+  const cards = [
+    ["What is erosion?", "The wearing away of rock by the sea"],
+    ["What is hydraulic action?", "Waves force water into cracks"],
+    ["What is a stack?", "A pillar of rock left after an arch collapses"]
+  ];
+
+  let index = 0;
+  let flipped = false;
+
+  function flipCard() {
+    flipped = !flipped;
+    document.getElementById("cardText").innerText =
+      flipped ? cards[index][1] : cards[index][0];
+  }
+
+  // Simple AI marking
+  function markAnswer() {
+    let text = document.getElementById("answer").value.toLowerCase();
+
+    let score = 0;
+    let keywords = ["hydraulic", "abrasion", "cave", "arch", "collapse", "stack"];
+
+    keywords.forEach(k => {
+      if (text.includes(k)) score++;
+    });
+
+    let www = "Good attempt.";
+    let ebi = "Add more key terms and explain each stage.";
+
+    if (score > 3) {
+      www = "Strong use of key terms.";
+      ebi = "Develop your explanation further.";
+    }
+
+    document.getElementById("feedback").innerHTML = `
+      <div class="feedback www"><strong>WWW:</strong> ${www}</div>
+      <div class="feedback ebi"><strong>EBI:</strong> ${ebi}</div>
+      <p>Score: ${score}/6</p>
+    `;
+  }
+</script>
+
+</body>
+</html>
